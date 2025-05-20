@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BR BAKES</title>
+  <link rel="icon" href="logo.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Charmonman&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #f5f2ec;
+      font-family: 'Quicksand', sans-serif;
+      color: #3e2a2a;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      if showTicker {
+      padding-top: 30px; /* reserved space for ticker */
+     }
+    }
+
+    /* Flash news ticker */
+    .flash-news {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #a9746e;
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      height: 30px;
+      line-height: 30px;
+      overflow: hidden;
+      z-index: 9999;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      display: none; /* default hidden, shown via JS */
+    }
+
+    .flash-news__content {
+      display: inline-block;
+      padding-left: 100%;
+      white-space: nowrap;
+      animation: scroll-left 15s linear infinite;
+    }
+
+    @keyframes scroll-left {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .hero {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 85vh;
+      padding: 2rem;
+      text-align: center;
+      background-image: url('banner.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: white;
+      font-weight: 600;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(62, 39, 35, 0.7);
+      z-index: 0;
+    }
+
+    .hero > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero img {
+      width: 100vh;
+      max-width: 250px;
+      min-width: 150px;
+      height: 100vh;
+      max-height: 250px;
+      min-height: 150px;
+      margin-bottom: 1rem;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 1);
+    }
+
+    .hero h1 {
+      font-family: 'Charmonman', cursive;
+      font-size: 3.5rem;
+      margin: 0.5rem 0 0;
+      font-weight:800;
+    }
+
+    .hero p {
+      margin-top: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .menu-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    .menu-image {
+      width: 90%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    footer {
+      position: relative;
+      background-image: url('banner.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: transparent;
+      color: #ffffff;
+      font-weight: 600;
+      text-align: center;
+      padding: 1.5rem 2rem;
+      font-size: 1.2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80px;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    footer::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(to top, rgba(62, 39, 35, 0.8), rgba(62, 39, 35, 0.6));
+      z-index: 0;
+    }
+
+    footer > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .whatsapp-link {
+      color: #25D366;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-weight: 700;
+    }
+
+    .whatsapp-link:hover {
+      text-decoration: underline;
+    }
+
+    .whatsapp-icon {
+      width: 20px;
+      height: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Flash News Ticker -->
+  <div class="flash-news" id="ticker" role="region" aria-label="Latest news">
+    <div class="flash-news__content" id="ticker-content"></div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <img src="logo.png" alt="BR BAKES Logo" />
+    <h1>BR BAKES</h1>
+    <p>Fresh Homemade Brownies</p>
+  </section>
+
+  <!-- Menu Section -->
+  <section class="menu-section">
+    <img src="brownie.webp" alt="Image failed to load..." class="menu-image" />
+    <img src="brownie.webp" alt="Image failed to load..." class="menu-image" />
+  </section>
+
+  <!-- Footer Section -->
+  <footer>
+    <span>Order via WhatsApp:</span>
+    <a class="whatsapp-link" href="https://wa.me/918825084161" target="_blank" rel="noopener noreferrer">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="whatsapp-icon" />
+      +91 88250 84161
+    </a>
+  </footer>
+
+  <script>
+
+//#########################################################################################################
+
+
+    const showTicker = true;
+    const tickerMessage = "🎉 Summer Sale: Get 20% off all brownies! Use code SUMMER20 at checkout! 🍫✨";
+
+
+//#########################################################################################################
+
+    if (showTicker && tickerMessage.trim() !== "") {
+      const ticker = document.getElementById("ticker");
+      const content = document.getElementById("ticker-content");
+      ticker.style.display = "block";
+      content.textContent = tickerMessage;
+    }
+  </script>
+</body>
+</html>
